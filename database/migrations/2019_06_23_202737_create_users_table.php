@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->string('location')->nullable();
-            $table->string('idNumber')->nullable();
+            $table->string('idNumber')->unique()->nullable();
             $table->string('isUserRegistered')->default('0');
             $table->string('isUserVerified')->default('0');
             $table->string('isUserSuspended')->default('0');
