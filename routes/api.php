@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Users
 Route::get('allUsers', 'UsersController@allUsers');
-Route::get('getMamaNguo', 'UsersController@getMamaNguo');
+Route::get('getAvailableMamaNguo', 'UsersController@getAvailableMamaNguo');
 Route::post('newUser', 'UsersController@storeUser');
 Route::post('newMamaNguo', 'UsersController@storeMamaNguo');
 

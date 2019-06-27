@@ -73,11 +73,13 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
-    public function getMamaNguo()
+    public function getAvailableMamaNguo()
     {
         $mamanguo = DB::table('users')
+					->select('firstName','lastName', 'phoneNumber','mamanguoId','rating','status')
                     ->join('ratings', 'users.userId','=','ratings.mamanguoId')
-                    ->groupBy('users.userId')
+                    ->where('status','=',1)
+					->groupBy('users.userId')
                     ->get();
         return response()->json($mamanguo); 
     } 
