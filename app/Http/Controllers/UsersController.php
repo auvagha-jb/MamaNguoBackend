@@ -25,13 +25,14 @@ class UsersController extends Controller
      */
     public function create(Request $request)
     {
+		$password = $request->input('password');
         $user = new User;
         $user->roleId = $request->input('roleId'); //MamaNguo or a user
         $user->firstName = $request->input('firstName');
         $user->lastName = $request->input('lastName');
         $user->phoneNumber = $request->input('phoneNumber');
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        $user->password = password_hash($password, PASSWORD_BCRYPT);
         $user->location = $request->input('location');
         return $user;
     }
@@ -42,7 +43,7 @@ class UsersController extends Controller
         $user->isUserRegistered = 1;
         $saved = $user->save();
         $message = $saved ? "Registration successful" : "Something went wrong. Please try again later.";
-        return response()->json(['status' => $added, 'message' => $message]);
+        return response()->json(['status' => $saved, 'message' => $message, 'user'=>$user]);
     }
 
     /**
