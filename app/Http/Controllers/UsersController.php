@@ -93,12 +93,12 @@ class UsersController extends Controller
         $message = "User does not exist";
         
 		$user = DB::table('users')
-				->select('userId','email','firstName', 'lastName', 'phoneNumber')
+				->select('userId','email','firstName', 'lastName', 'phoneNumber', 'password')
 				->where('email', '=',  $email);
 				
 		if($user->exists()){
             $result = $user->first(); //Retrieve a single record
-            $password_hash = $result['password'];
+            $password_hash = $result->password;
             $status = password_verify($password, $password_hash);
             $message = $status ? "Successfully logged in": "Incorrect password";
         }
