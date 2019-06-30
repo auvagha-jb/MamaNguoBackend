@@ -85,6 +85,27 @@ class UsersController extends Controller
         return response()->json($mamanguo); 
     } 
 
+	public function userLogin(Request $request)
+	{
+		$email = $request->input('email');
+		$password = $request->input('password');
+		$status = false;
+        $message = "User does not exist";
+        
+		$user = DB::table('users')
+				->select('userId','email','firstName', 'lastName', 'phoneNumber')
+				->where('email', '=',  $email);
+				
+		if($user->exists()){
+            $result = $user->first(); //Retrieve a single record
+            $password_hash = $result['password'];
+            $status = password_verify($password, $password_hash);
+            $message = $status ? "Successfully logged in": "Incorrect password";
+        }
+
+        return response()->json(['status'=>$status, 'message'=>$message]);
+	}
+
     /**
      * Show the form for editing the specified resource.
      *

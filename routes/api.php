@@ -22,6 +22,7 @@ Route::get('allUsers', 'UsersController@allUsers');
 Route::get('getAvailableMamaNguo', 'UsersController@getAvailableMamaNguo');
 Route::post('addUser', 'UsersController@storeUser');
 Route::post('addMamaNguo', 'UsersController@storeMamaNguo');
+Route::post('userLogin','UsersController@userLogin');
 
 //Ratings
 Route::post('addRating', 'RatingsController@addRating');
