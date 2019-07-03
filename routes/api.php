@@ -29,3 +29,12 @@ Route::post('addRating', 'RatingsController@addRating');
 
 //Role
 Route::post('addRole', 'RolesController@addRole');
+
+//MamaNguo
+Route::post('login', 'PassportController@login');
+Route::post('register', 'PassportController@register');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('logout', 'PassportController@logout');
+ 
+});

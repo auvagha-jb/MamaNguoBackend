@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->integer('roleId'); //MamaNguo or a user
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('phoneNumber');
+            $table->string('phoneNumber')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->string('location')->nullable();
@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('isUserRegistered')->default('0');
             $table->string('isUserVerified')->default('0');
             $table->string('isUserSuspended')->default('0');
+            $table->string('isUserLoggedIn')->default('0');
             $table->string('status')->default('1');
             $table->timestamps();
         });
