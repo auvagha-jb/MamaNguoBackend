@@ -8,6 +8,8 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
+    protected $primaryKey = 'userId';
+
     use HasApiTokens, Notifiable;
 
     /**
@@ -27,4 +29,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function requests()
+    {
+        return $this->hasMany('App\RequestedService', 'userId', 'userId');
+    }
 }

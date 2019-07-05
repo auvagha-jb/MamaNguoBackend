@@ -14,15 +14,23 @@ class CreateRequestedServicesTable extends Migration
     public function up()
     {
         Schema::create('requested_services', function (Blueprint $table) {
-            $table->bigIncrements('serviceId');
-            $table->integer('userId');//MamaNguo Id
-            $table->integer('requesteeId');
+            $table->bigIncrements('requestId');
+            $table->bigInteger('userId')->unsigned();;//MamaNguo Id
+            $table->bigInteger('requesteeId')->unsigned();;
             $table->string('description');
             $table->integer('quantity');
             $table->integer('cost');
             $table->double('longitude');
             $table->double('latitude');
+            $table->string('location');
+            $table->string('status')->default('Incomplete');
             $table->timestamps();
+            $table->foreign('userId')
+                  ->references('userId')
+                  ->on('users');
+            $table->foreign('requesteeId')
+                  ->references('userId')
+                  ->on('users');
         });
     }
 

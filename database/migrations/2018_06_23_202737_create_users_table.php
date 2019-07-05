@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('isUserVerified')->default('0');
             $table->string('isUserSuspended')->default('0');
             $table->string('isUserLoggedIn')->default('0');
-            $table->string('status')->default('1');
+            $table->string('status')->default('0');
             $table->timestamps();
         });
     }

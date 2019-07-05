@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RequestedServicesController extends Controller
 {
+
+    public function getRequest($id){
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,18 +40,48 @@ class RequestedServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        
+
+       
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $userId = auth()->user()->userId;
+
+        // $request = DB::table('requested_services')
+        //         ->where('status','Incomplete',['userID', '=', $userId])
+        //         ->first();
+
+        // $request = DB::table('requested_services')
+        //         ->select('users.*', 'requested_services.*')
+        //         ->join(DB::raw("(SELECT * FROM users
+        //                 WHERE userId = $userId) as users"),
+        //                 function($join){
+        //                     $join->on("users.userId", "=", "requested_services.requesteeId");
+        //                 })
+        //         ->get();
+
+        $request = DB::table('requested_services')
+                ->select('users.*','requested_services.*')
+                ->join('users', 'users.userId', '=', 'requested_services.requesteeId')
+                ->where('requested_services.userId', $userId)
+                ->get();
+
+        return response()->json($request, 200);
+
+         // $users = DB::table('requests')
+        //         ->join('users', 'users.userId', '=', $userId)
+        //         ->join('orders', 'users.id', '=', 'orders.user_id')
+        //         ->select('users.*', 'contacts.phone', 'orders.price')
+        //         ->get();
     }
 
     /**

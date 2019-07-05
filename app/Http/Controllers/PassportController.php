@@ -85,4 +85,16 @@ class PassportController extends Controller
         $response = 'You have been succesfully logged out!';
         return response($response, 200);
      }
+
+     /**
+     * Returns Authenticated User Details
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function details()
+    {
+        $user = auth()->user();
+        
+        return response()->json($user, 200);
+    }
 }
