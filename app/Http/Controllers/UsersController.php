@@ -91,19 +91,32 @@ class UsersController extends Controller
 		$password = $request->input('password');
 		$status = false;
         $message = "User does not exist";
+        $target = "username";
         
 		$user = DB::table('users')
 				->select('userId','email','firstName', 'lastName', 'phoneNumber', 'password')
 				->where('email', '=',  $email);
 				
 		if($user->exists()){
+		    $target = "password";
             $result = $user->first(); //Retrieve a single record
             $password_hash = $result->password;
             $status = password_verify($password, $password_hash);
-            $message = $status ? "Successfully logged in": "Incorrect password";
+            $login_status = ['status'=>$status, 'target'=>$target];
+            
+            $user_data = [
+                    'firstName'=>$result->firstName, 
+                    'lastName'=>$result->lastName, 
+                    'email'=>$result->email, 
+                    'phoneNumber'=>$result->phoneNumber
+            ];
+            
+            $response = $status ? array_merge($user_data, $login_status): $login_status;
+            
+            return response()->json($response);
         }
 
-        return response()->json(['status'=>$status, 'message'=>$message]);
+        return response()->json(['status'=>$status, 'message'=>$message, 'target'=>$target]);
 	}
 
     /**
