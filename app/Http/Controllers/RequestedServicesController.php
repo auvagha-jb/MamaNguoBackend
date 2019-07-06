@@ -73,7 +73,7 @@ class RequestedServicesController extends Controller
                 ->select('users.*','requested_services.*')
                 ->join('users', 'users.userId', '=', 'requested_services.requesteeId')
                 ->where('requested_services.userId', $userId)
-                ->get();
+                ->first();
 
         return response()->json($request, 200);
 
