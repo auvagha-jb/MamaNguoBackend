@@ -23,6 +23,7 @@ class CreateRequestedServicesTable extends Migration
             $table->double('longitude');
             $table->double('latitude');
             $table->string('location');
+            $table->integer('totalCost');
             $table->string('status')->default('Incomplete');
             $table->timestamps();
             $table->foreign('userId')
