@@ -18,8 +18,8 @@ class CreateRequestedServicesTable extends Migration
             $table->bigInteger('userId')->unsigned();;//MamaNguo Id
             $table->bigInteger('requesteeId')->unsigned();;
             $table->string('description');
-            $table->integer('quantity');
-            $table->integer('cost');
+            $table->string('quantity');
+            $table->string('cost');
             $table->double('longitude');
             $table->double('latitude');
             $table->string('location');
