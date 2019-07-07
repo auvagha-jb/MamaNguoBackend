@@ -139,4 +139,22 @@ class RequestedServicesController extends Controller
             return response()->json(['message' => "Not Cancelled"], 404);
         }
     }
+
+    public function completeRequest(Request $request)
+    {
+        $userId = auth()->user()->userId;
+
+        $status = [
+            'status' => $request->status
+        ];
+
+        $updateQuery = DB::table('requested_services')
+            ->where('userId', $userId)
+            ->update($status);
+        if ($updateQuery) {
+            return response()->json(['message' => "Completed"], 200);
+        }else{
+            return response()->json(['message' => "Not Completed"], 404);
+        }
+    }
 }
