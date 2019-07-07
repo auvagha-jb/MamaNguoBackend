@@ -130,7 +130,7 @@ class RequestedServicesController extends Controller
             'status' => $request->status
         ];
 
-        $updateQuery = DB::table('users')
+        $updateQuery = DB::table('requested_services')
             ->where('userId', $userId)
             ->update($status);
         if ($updateQuery) {
