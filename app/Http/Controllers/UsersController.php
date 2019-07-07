@@ -43,7 +43,7 @@ class UsersController extends Controller
         $user->isUserRegistered = 1;
         $saved = $user->save();
         $message = $saved ? "Registration successful" : "Something went wrong. Please try again later.";
-        return response()->json(['status' => $saved, 'message' => $message, 'user'=>$user]);
+        return response()->json(['status' => $saved, 'message' => $message, 'userId'=>$user->userId]);
     }
 
     /**
@@ -105,12 +105,14 @@ class UsersController extends Controller
             $login_status = ['status'=>$status, 'target'=>$target];
             
             $user_data = [
+                    'userId'=>$result->userId,
                     'firstName'=>$result->firstName, 
                     'lastName'=>$result->lastName, 
                     'email'=>$result->email, 
                     'phoneNumber'=>$result->phoneNumber
             ];
             
+            //If login is successful, send the user data along with the response
             $response = $status ? array_merge($user_data, $login_status): $login_status;
             
             return response()->json($response);
