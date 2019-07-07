@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\RequestedService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -120,6 +121,50 @@ class UsersController extends Controller
 
         return response()->json(['status'=>$status, 'message'=>$message, 'target'=>$target]);
 	}
+
+
+    public function getHistory($userId)
+    {
+        $history = DB::table('users')
+					->select('firstName','lastName', 'phoneNumber', 'requested_services.userId AS mamanguoId' , 'requested_services.created_at', 'status')
+                    ->join('requested_services', 'users.userId','=','requested_services.userId')
+                    ->where('requested_services.requesteeId','=',$userId)
+					->orderBy('requested_services.created_at', 'DESC')
+					->groupBy('requested_services.userId')
+                    ->get();
+        return response()->json($history); 
+    }
+    
+    
+    public function updateProfile(Request $request) 
+    {
+        $status = DB::table('users')
+                    ->where('userId', $request->input('userId'))
+                    ->update([
+                        'firstName'=>$request->input('firstName'),
+                    	'lastName'=>$request->input('lastName'),
+                    	"phoneNumber"=> $request->input('phoneNumber'),
+                    	"email"=> $request->input('email')  
+                    	]);
+        return response()->json(['status'=>$status]); 
+    }
+    
+    public function makeRequest(Request $request)
+    {
+        $rs = new RequestedService;
+        $rs->userId = $request->input('userId');
+        $rs->requesteeId = $request->input('requesteeId');
+        $rs->description = $request->input('description');
+        $rs->quantity = $request->input('quantity');
+        $rs->cost = $request->input('cost');
+        $rs->longitude = $request->input('longitude');
+        $rs->latitude = $request->input('latitude');
+        $rs->location = $request->input('location');
+        $rs->totalCost = $request->input('totalCost');
+        $status = $rs->save();
+        
+        return response()->json(['status'=>$status]); 
+    }
 
     /**
      * Show the form for editing the specified resource.

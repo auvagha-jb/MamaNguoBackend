@@ -20,9 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Users
 Route::get('allUsers', 'UsersController@allUsers');
 Route::get('getAvailableMamaNguo', 'UsersController@getAvailableMamaNguo');
+Route::get('getHistory/{userId}', 'UsersController@getHistory');
 Route::post('addUser', 'UsersController@storeUser');
 Route::post('addMamaNguo', 'UsersController@storeMamaNguo');
 Route::post('userLogin','UsersController@userLogin');
+Route::post('makeRequest','UsersController@makeRequest');
+Route::put('updateProfile','UsersController@updateProfile');
 
 //Ratings
 Route::post('addRating', 'RatingsController@addRating');
