@@ -106,9 +106,9 @@ class RequestedServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -120,5 +120,23 @@ class RequestedServicesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cancelRequest(Request $request)
+    {
+        $userId = auth()->user()->userId;
+
+        $status = [
+            'status' => $request->status
+        ];
+
+        $updateQuery = DB::table('users')
+            ->where('userId', $userId)
+            ->update($status);
+        if ($updateQuery) {
+            return response()->json(['message' => "Cancelled"], 200);
+        }else{
+            return response()->json(['message' => "Not Cancelled"], 404);
+        }
     }
 }
