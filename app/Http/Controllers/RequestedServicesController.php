@@ -152,7 +152,7 @@ class RequestedServicesController extends Controller
             ->where('userId', $userId)
             ->update($status);
         
-            // return response()->json($userId, 200);
+            return response()->json($userId, 200);
         if ($updateQuery) {
             return response()->json(['message' => "Completed"], 200);
         }else{
