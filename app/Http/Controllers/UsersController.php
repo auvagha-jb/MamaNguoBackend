@@ -162,8 +162,9 @@ class UsersController extends Controller
         $rs->location = $request->input('location');
         $rs->totalCost = $request->input('totalCost');
         $status = $rs->save();
+        $message = $status ? "Request successful" : "Error making request";
         
-        return response()->json(['status'=>$status]); 
+        return response()->json(['status'=>$status, 'message'=>$message]); 
     }
 
     /**
