@@ -38,6 +38,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('user','PassportController@details');
     Route::post('logout', 'PassportController@logout');
     Route::get('request', 'RequestedServicesController@show');
-    Route::get('cancelRequest', 'RequestedServicesController@cancelRequest');
+    Route::post('cancelRequest', 'RequestedServicesController@cancelRequest');
  
 });
