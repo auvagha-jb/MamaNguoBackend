@@ -39,5 +39,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'PassportController@logout');
     Route::get('request', 'RequestedServicesController@show');
     Route::post('cancelRequest', 'RequestedServicesController@cancelRequest');
+    Route::post('completeRequest', 'RequestedServicesController@completeRequest');
  
 });
