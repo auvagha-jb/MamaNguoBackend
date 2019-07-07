@@ -72,7 +72,7 @@ class RequestedServicesController extends Controller
         $request = DB::table('requested_services')
                 ->select('users.*','requested_services.*')
                 ->join('users', 'users.userId', '=', 'requested_services.requesteeId')
-                ->where('status','Incomplete',['requested_services.userId','=', $userId])
+                ->where('requested_services.status','Incomplete',['requested_services.userId','=', $userId])
                 ->first();
 
         if (empty($request)) {
