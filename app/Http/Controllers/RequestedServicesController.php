@@ -75,6 +75,10 @@ class RequestedServicesController extends Controller
                 ->where('requested_services.userId', $userId)
                 ->first();
 
+        if (empty($request)) {
+            return response()->json($request, 404);
+        }
+
         return response()->json($request, 200);
 
          // $users = DB::table('requests')
