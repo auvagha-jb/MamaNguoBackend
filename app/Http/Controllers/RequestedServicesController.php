@@ -72,10 +72,9 @@ class RequestedServicesController extends Controller
         $request = DB::table('requested_services')
                 ->select('users.*','requested_services.*')
                 ->join('users', 'users.userId', '=', 'requested_services.requesteeId')
-                ->where('requested_services.status','=','Incomplete',['requested_services.userId','=', $userId])
+                ->where('requested_services.status','Incomplete',['requested_services.userId','=', $userId])
                 ->first();
-
-        // return response()->json($userId, 200);
+        // return response()->json($request, 200);
         if (empty($request)) {
             return response()->json($request, 404);
         }
