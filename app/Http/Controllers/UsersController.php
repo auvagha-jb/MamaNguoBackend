@@ -126,7 +126,7 @@ class UsersController extends Controller
     public function getHistory($userId)
     {
         $history = DB::table('users')
-					->select('firstName','lastName', 'phoneNumber', 'requested_services.userId AS mamanguoId' , 'requested_services.created_at', 'status')
+					->select('firstName','lastName', 'phoneNumber', 'requested_services.userId AS mamanguoId' , 'requested_services.created_at', 'requested_services.status')
                     ->join('requested_services', 'users.userId','=','requested_services.userId')
                     ->where('requested_services.requesteeId','=',$userId)
 					->orderBy('requested_services.created_at', 'DESC')
