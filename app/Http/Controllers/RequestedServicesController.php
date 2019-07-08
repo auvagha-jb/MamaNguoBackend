@@ -75,6 +75,7 @@ class RequestedServicesController extends Controller
                 ->where('requested_services.status','Incomplete',['requested_services.userId','=', $userId])
                 ->first();
 
+        return response()->json($userId, 200);
         if (empty($request)) {
             return response()->json($request, 404);
         }
