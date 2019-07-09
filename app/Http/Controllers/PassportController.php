@@ -77,7 +77,7 @@ class PassportController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-     public function logout(Request $request)
+     public function userLogout(Request $request)
      {
         $token = auth()->user()->token();
         $token->revoke();
