@@ -40,6 +40,7 @@ class RatingsController extends Controller
         $rating->userId = $request->input('userId');
         $rating->mamanguoId = $request->input('mamanguoId');
         $rating->rating = $request->input('rating');
+        $rating->comment = $request->input('comment');
         $saved = $rating->save();
 
         $message = $saved ? "Rated" : "An error occurred";

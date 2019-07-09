@@ -138,7 +138,7 @@ class UsersController extends Controller
     
     public function updateProfile(Request $request) 
     {
-        $status = DB::table('users')
+        $statusInt = DB::table('users')
                     ->where('userId', $request->input('userId'))
                     ->update([
                         'firstName'=>$request->input('firstName'),
@@ -146,6 +146,8 @@ class UsersController extends Controller
                     	"phoneNumber"=> $request->input('phoneNumber'),
                     	"email"=> $request->input('email')  
                     	]);
+                    	
+        $status = $statusInt == 1? true: false;
         return response()->json(['status'=>$status]); 
     }
     

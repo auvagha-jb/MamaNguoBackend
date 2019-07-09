@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->integer('userId');
             $table->integer('mamanguoId');
             $table->integer('rating');
+            $table->string('rating')->default('none');
             $table->timestamps();
         });
     }
