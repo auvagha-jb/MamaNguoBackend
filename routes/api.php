@@ -39,7 +39,7 @@ Route::post('register', 'PassportController@register');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('user','PassportController@details');
-    Route::post('userLogout', 'PassportController@logout');
+    Route::post('logout', 'PassportController@logout');
     Route::get('request', 'RequestedServicesController@show');
     Route::post('cancelRequest', 'RequestedServicesController@cancelRequest');
     Route::post('completeRequest', 'RequestedServicesController@completeRequest');
